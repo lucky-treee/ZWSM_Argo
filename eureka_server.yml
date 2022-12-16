@@ -1,0 +1,47 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka_server
+  namespace: luckytree_zwsm
+  labels:
+    app: eureka_server
+spec:
+  selector:
+    matchLabels:
+      app: eureka_server
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: eureka_server
+    spec:
+      # initContainers:
+        # Init containers are exactly like regular containers, except:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      containers:
+      - name: eureka_server
+        image: 192.168.0.14:30016/eureka_server:5
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: 500Mi
+          limits:
+            memory: 500Mi
+        ports:
+        - containerPort: 8761
+          name: eureka_server
+        volumeMounts:
+        - name: localtime
+          mountPath: /etc/localtime
+      volumes:
+        - name: localtime
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Taipei
+      restartPolicy: Always
