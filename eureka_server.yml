@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eureka_server
-  namespace: luckytree_zwsm
+  namespace: luckytree-zwsm
   labels:
     app: eureka_server
 spec:
