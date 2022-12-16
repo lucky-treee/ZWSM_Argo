@@ -2,14 +2,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eureka_server
+  name: eureka-server
   namespace: luckytree-zwsm
   labels:
-    app: eureka_server
+    app: eureka-server
 spec:
   selector:
     matchLabels:
-      app: eureka_server
+      app: eureka-server
   replicas: 1
   strategy:
     rollingUpdate:
@@ -19,15 +19,15 @@ spec:
   template:
     metadata:
       labels:
-        app: eureka_server
+        app: eureka-server
     spec:
       # initContainers:
         # Init containers are exactly like regular containers, except:
           # - Init containers always run to completion.
           # - Each init container must complete successfully before the next one starts.
       containers:
-      - name: eureka_server
-        image: 192.168.0.14:30016/eureka_server:5
+      - name: eureka-server
+        image: 192.168.0.14:30016/eureka-server:5
         imagePullPolicy: IfNotPresent
         resources:
           requests:
@@ -36,7 +36,7 @@ spec:
             memory: 500Mi
         ports:
         - containerPort: 8761
-          name: eureka_server
+          name: eureka-server
         volumeMounts:
         - name: localtime
           mountPath: /etc/localtime
