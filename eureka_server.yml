@@ -45,3 +45,14 @@ spec:
           hostPath:
             path: /usr/share/zoneinfo/Asia/Taipei
       restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka-server
+spec:
+  selector:
+    app: eureka-server
+  ports:
+  - port: 8761
+    targetPort: 8761
