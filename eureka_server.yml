@@ -27,7 +27,7 @@ spec:
           # - Each init container must complete successfully before the next one starts.
       containers:
       - name: eureka-server
-        image: 192.168.0.14:30016/eureka_server:7
+        image: 192.168.0.14:30016/eureka_server:10
         imagePullPolicy: IfNotPresent
         resources:
           requests:
