@@ -36,5 +36,4 @@ spec:
             memory: 500Mi
         ports:
         - containerPort: 8888
-          name: cloud-config-server
       restartPolicy: Always
