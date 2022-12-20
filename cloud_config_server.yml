@@ -27,7 +27,7 @@ spec:
           # - Each init container must complete successfully before the next one starts.
       containers:
       - name: cloud-config-server
-        image: 192.168.0.14:30016/cloud-config-svr:4
+        image: 192.168.0.14:30016/cloud-config-svr:5
         imagePullPolicy: IfNotPresent
         resources:
           requests:
