@@ -43,8 +43,11 @@ kind: Service
 metadata:
   name: gateway-server
 spec:
+  type: NodePort
   selector:
     app: gateway-server
   ports:
   - port: 8084
     targetPort: 8084
+    nodePort: 31184
+    
