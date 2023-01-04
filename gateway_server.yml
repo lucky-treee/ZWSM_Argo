@@ -1,0 +1,50 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-server
+  namespace: luckytree-zwsm
+  labels:
+    app: gateway-server
+spec:
+  selector:
+    matchLabels:
+      app: gateway-server
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: gateway-server
+    spec:
+      # initContainers:
+        # Init containers are exactly like regular containers, except:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      containers:
+      - name: gateway-server
+        image: 192.168.0.14:30016/spring-gateway:7
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 500Mi
+          limits:
+            memory: 500Mi
+        ports:
+        - containerPort: 8888
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-server
+spec:
+  selector:
+    app: gateway-server
+  ports:
+  - port: 8084
+    targetPort: 8084
