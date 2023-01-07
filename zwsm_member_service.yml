@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: zwsm-member-service
-  replicas: 1
+  replicas: 0
   strategy:
     rollingUpdate:
       maxSurge: 25%
