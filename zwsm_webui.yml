@@ -35,5 +35,5 @@ spec:
           limits:
             memory: 500Mi
         ports:
-        - containerPort: 10100
+        - containerPort: 10400
       restartPolicy: Always
