@@ -1,0 +1,39 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zwsm_webui
+  namespace: luckytree-zwsm-web-ui
+  labels:
+    app: zwsm_webui
+spec:
+  selector:
+    matchLabels:
+      app: zwsm_webui
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: zwsm_webui
+    spec:
+      # initContainers:
+        # Init containers are exactly like regular containers, except:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      containers:
+      - name: zwsm_webui
+        image: 192.168.0.14:30016/zwsm-web-ui:17
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: 500Mi
+          limits:
+            memory: 500Mi
+        ports:
+        - containerPort: 10100
+      restartPolicy: Always
