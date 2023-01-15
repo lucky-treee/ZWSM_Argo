@@ -37,3 +37,38 @@ spec:
         ports:
         - containerPort: 10400
       restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zwsm-webui
+spec:
+  selector:
+    app: zwsm-webui
+  ports:
+  - port: 10400
+    targetPort: 10400
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+      kubernetes.io/ingress.class: "nginx"
+  name: webui-ingress-ssl
+spec:
+  ingressClassName: "nginx"
+  tls:
+  - hosts:
+    - webui.c0dewave.com
+    secretName: secret-https
+  rules:
+  - host: webui.c0dewave.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: zwsm-webui
+            port:
+              number: 10400
