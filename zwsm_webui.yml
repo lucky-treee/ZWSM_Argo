@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: zwsm_webui
-  namespace: luckytree-zwsm-web-ui
+  namespace: luckytree-zwsm
   labels:
     app: zwsm_webui
 spec:
