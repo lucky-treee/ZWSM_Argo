@@ -46,8 +46,8 @@ spec:
   selector:
     app: zwsm-webui
   ports:
-  - port: 10400
-    targetPort: 10400
+  - port: 8080  
+    targetPort: 8080
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -70,4 +70,4 @@ spec:
           service:
             name: zwsm-webui
             port:
-              number: 10400
+              number: 8080
