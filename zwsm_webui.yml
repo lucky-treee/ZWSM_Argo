@@ -56,7 +56,6 @@ metadata:
       kubernetes.io/ingress.class: "nginx"
   name: webui-ingress-ssl
 spec:
-  ingressClassName: "nginx"
   tls:
   - hosts:
     - webui.c0dewave.com
