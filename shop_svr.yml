@@ -38,3 +38,15 @@ spec:
         - containerPort: 10300
       restartPolicy: Always
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shop-service-service
+spec:
+  type: NodePort
+  selector:
+    app: shop-service
+  ports:
+  - port: 10300
+    targetPort: 10300
+    nodePort: 31284
