@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: shop-service
-  replicas: 0
+  replicas: 1
   strategy:
     rollingUpdate:
       maxSurge: 25%
