@@ -50,3 +50,26 @@ spec:
   - port: 10300
     targetPort: 10300
     nodePort: 31284
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+      kubernetes.io/ingress.class: "nginx"
+  name: poom-shop-ingress
+spec:
+  tls:
+  - hosts:
+    - poom-shop.c0dewave.com
+    secretName: secret-https
+  rules:
+  - host: poom-shop.c0dewave.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: shop-service-service
+            port:
+              number: 10300
