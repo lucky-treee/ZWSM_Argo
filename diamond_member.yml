@@ -1,0 +1,75 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: member
+  namespace: luckytree-zwsm
+  labels:
+    app: member
+spec:
+  selector:
+    matchLabels:
+      app: member
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: member
+    spec:
+      # initContainers:
+        # Init containers are exactly like regular containers, except:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      containers:
+      - name: member
+        image: 192.168.0.14:30016/member:1
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: 500Mi
+          limits:
+            memory: 500Mi
+        ports:
+        - containerPort: 10100
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: member-service
+spec:
+  type: NodePort
+  selector:
+    app: member-service
+  ports:
+  - port: 10100
+    targetPort: 10100
+    nodePort: 31284
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+      kubernetes.io/ingress.class: "nginx"
+  name: poom-member-ingress
+spec:
+  tls:
+  - hosts:
+    - poom-shop.c0dewave.com
+    secretName: secret-https
+  rules:
+  - host: poom-shop.c0dewave.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: member-service
+            port:
+              number: 10100
