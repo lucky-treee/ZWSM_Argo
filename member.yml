@@ -60,10 +60,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - poom-shop.c0dewave.com
+    - poom-member.c0dewave.com
     secretName: secret-https
   rules:
-  - host: poom-shop.c0dewave.com
+  - host: poom-member.c0dewave.com
     http:
       paths:
       - path: /
