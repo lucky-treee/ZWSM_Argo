@@ -45,7 +45,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: member-service
+    app: member
   ports:
   - port: 10100
     targetPort: 10100
