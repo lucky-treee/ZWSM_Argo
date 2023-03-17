@@ -41,10 +41,10 @@ metadata:
   namespace: luckytree-zwsm
 spec:
   selector:
-    app: redis-service
+    app: redis
   type: ClusterIP
   ports:
-  - name: redis-service
+  - name: redis-port
     protocol: TCP
     port: 6379
     targetPort: 6379
