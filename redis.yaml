@@ -32,3 +32,20 @@ spec:
             secretKeyRef:
               name: redis
               key: REDIS_PASS
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  namespace: default
+spec:
+  selector:
+    app: redis-service
+  type: ClusterIP
+  ports:
+  - name: redis-service
+    protocol: TCP
+    port: 6379
+    targetPort: 6379
+---
