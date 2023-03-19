@@ -34,9 +34,9 @@ spec:
             memory: 500Mi
           limits:
             memory: 500Mi
-        env:
-          - name: eureka.instance.preferIpAddress
-            value: "true"
+        # env:
+        #   - name: eureka.instance.preferIpAddress
+        #     value: "true"
         ports:
         - containerPort: 8761
           name: eureka-server
