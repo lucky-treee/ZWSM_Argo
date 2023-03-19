@@ -43,13 +43,17 @@ kind: Service
 metadata:
   name: shop-service-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: shop-service
   ports:
   - port: 10300
     targetPort: 10300
     nodePort: 31284
+status:
+  loadBalancer:
+    ingress:
+    - ip: 192.168.0.123
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
