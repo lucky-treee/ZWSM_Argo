@@ -2,14 +2,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shop-service
+  name: shop
   namespace: luckytree-zwsm
   labels:
-    app: shop-service
+    app: shop
 spec:
   selector:
     matchLabels:
-      app: shop-service
+      app: shop
   replicas: 1
   strategy:
     rollingUpdate:
@@ -19,14 +19,14 @@ spec:
   template:
     metadata:
       labels:
-        app: shop-service
+        app: shop
     spec:
       # initContainers:
         # Init containers are exactly like regular containers, except:
           # - Init containers always run to completion.
           # - Each init container must complete successfully before the next one starts.
       containers:
-      - name: shop-service
+      - name: shop
         image: 192.168.0.14:30016/shop:214
         imagePullPolicy: IfNotPresent
         resources:
@@ -41,11 +41,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: shop-service-service
+  name: shop
 spec:
   type: LoadBalancer
   selector:
-    app: shop-service
+    app: shop
   ports:
   - port: 10300
     targetPort: 10300
@@ -74,6 +74,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: shop-service-service
+            name: shop
             port:
               number: 10300
