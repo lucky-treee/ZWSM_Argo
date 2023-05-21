@@ -27,7 +27,7 @@ spec:
           # - Each init container must complete successfully before the next one starts.
       containers:
       - name: auth
-        image: 192.168.0.14:30016/auth:16
+        image: 192.168.0.14:30016/auth:18
         imagePullPolicy: IfNotPresent
         resources:
           requests:
