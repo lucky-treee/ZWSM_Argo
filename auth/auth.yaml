@@ -64,13 +64,13 @@ metadata:
 spec:
   tls:
   - hosts:
-    - poom-auth.c0dewave.com
+    - poom.c0dewave.com
     secretName: secret-https
   rules:
-  - host: poom-auth.c0dewave.com
+  - host: poom.c0dewave.com
     http:
       paths:
-      - path: /
+      - path: /auth
         pathType: Prefix
         backend:
           service:
