@@ -27,7 +27,7 @@ spec:
           # - Each init container must complete successfully before the next one starts.
       containers:
       - name: shop
-        image: 192.168.0.14:30016/shop:274
+        image: 192.168.0.14:30016/shop:278
         imagePullPolicy: IfNotPresent
         resources:
           requests:
